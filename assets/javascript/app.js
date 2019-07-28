@@ -2,6 +2,8 @@ $(document).ready(function () {
     var myGlobal = {
         questionTimer: 0,
 
+        timesUp: false,
+
         questionOptions: [
             {
                 question: "Which kingdom became the dominant power in England during the 8th century?",
@@ -9,7 +11,8 @@ $(document).ready(function () {
                 answer2: "Mercia",
                 answer3: "East Anglia",
                 answer4: "Northumbria",
-                correctAnswer: "answer2"
+                correctAnswer: "answer2",
+                image: "../images/flag-of-mercia.png"
             },
 
             {
@@ -18,7 +21,8 @@ $(document).ready(function () {
                 answer2: "William the Conqueror",
                 answer3: "Æthelstan",
                 answer4: "Edward the Elder",
-                correctAnswer: "answer3"
+                correctAnswer: "answer3",
+                image: "../images/athelstan-portrait.jpg"
             },
 
             {
@@ -27,16 +31,18 @@ $(document).ready(function () {
                 answer2: "Æthelred Unræd",
                 answer3: "Ælfweard",
                 answer4: "Edward the Confessor",
-                correctAnswer: "answer4"
+                correctAnswer: "answer4",
+                image: "../images/edward-the-confessor.jpg"
             },
-            
+
             {
                 question: "What Anglo-Saxon name was Emma of Normandy given when she became Queen of England?",
                 answer1: "Hild",
                 answer2: "Ælfgifu",
                 answer3: "Wulfhild",
                 answer4: "Ælfflæd",
-                correctAnswer: "answer2"
+                correctAnswer: "answer2",
+                image: "../images/emma-of-normandy.jpg"
             },
 
             {
@@ -45,7 +51,8 @@ $(document).ready(function () {
                 answer2: "ruler of all Britain",
                 answer3: "hero or champion",
                 answer4: "holy man",
-                correctAnswer: "answer1"
+                correctAnswer: "answer1",
+                image: "../images/harold-godwinson.jpg"
             },
 
             {
@@ -54,7 +61,8 @@ $(document).ready(function () {
                 answer2: "The quality of being a great king.",
                 answer3: "The ransom paid for a captured aristocrat.",
                 answer4: "The amount of money paid in compensation for crippling or murdering someone.",
-                correctAnswer: "answer4"
+                correctAnswer: "answer4",
+                image: "../images/weregild-payment.png"
             },
 
             {
@@ -63,7 +71,8 @@ $(document).ready(function () {
                 answer2: "a battleaxe",
                 answer3: "a large, mallet-like hammer",
                 answer4: "a short spear",
-                correctAnswer: "answer1"
+                correctAnswer: "answer1",
+                image: "../images/seax.jpg"
             },
 
             {
@@ -72,7 +81,8 @@ $(document).ready(function () {
                 answer2: "Ælfwine of Deira",
                 answer3: "Rædwulf of Northumbria",
                 answer4: "Offa of Mercia",
-                correctAnswer: "answer4"
+                correctAnswer: "answer4",
+                image: "../images/offa-coin.jpg"
             },
 
             {
@@ -81,7 +91,8 @@ $(document).ready(function () {
                 answer2: "the Isle of Sheppey",
                 answer3: "the Kentish coast",
                 answer4: "Monkwearmouth–Jarrow Abbey",
-                correctAnswer: "answer1"
+                correctAnswer: "answer1",
+                image: "../images/lindisfarne.jpg"
             },
 
             {
@@ -90,11 +101,30 @@ $(document).ready(function () {
                 answer2: "Harald Bluetooth",
                 answer3: "Guthrum",
                 answer4: "Ivar the Boneless",
-                correctAnswer: "answer3"
+                correctAnswer: "answer3",
+                image: "../images/guthrum-conversion.jpg"
             }
         ],
 
-        correctAnswer: ""
+        correctAnswer: "",
+
+        currentImage: ""
+    };
+
+    function tooLate() {
+        $("#triviaDiv").empty();
+
+        var outOfTime = $("<h2>");
+
+        outOfTime.text("Out of time!");
+
+        var showCorrectAnswer = $("<h2>");
+
+        showCorrectAnswer.text("Correct Answer: " + myGlobal.correctAnswer);
+
+        var answerImage = $("<img>");
+
+        answerImage.attr("src", myGlobal.currentImage);
     };
 
     function newQuestion() {
@@ -104,13 +134,17 @@ $(document).ready(function () {
 
         var chosenQuestion = myGlobal.questionOptions[questionChoice];
 
+        myGlobal.correctAnswer = chosenQuestion.correctAnswer;
+
+        myGlobal.currentImage = chosenQuestion.image;
+
         var nextQuestion = $("<div>");
 
         myGlobal.questionTimer = 30;
 
         var timeRemaining = $("<h2>");
 
-        timeRemaining.text("Time Remaining: 30 Seconds");
+        timeRemaining.text("Time Remaining: 30 Seconds").addClass("keepACount");
 
         var question = $("<h2>");
 
@@ -135,6 +169,18 @@ $(document).ready(function () {
         nextQuestion.append(timeRemaining, "<br />", question, "<br />", answer1, answer2, answer3, answer4).addClass("text-warning");
 
         $("#triviaDiv").append(nextQuestion);
+
+        if (!myGlobal.timesUp) {
+            var timerInterval = setInterval(function () {
+                myGlobal.questionTimer--;
+                $(".keepACount").text("Time Remaining: " + myGlobal.questionTimer + " Seconds");
+                if (myGlobal.questionTimer === 0) {
+                    myGlobal.timesUp = true;
+                    clearInterval(timerInterval);
+                    tooLate();
+                };
+            }, 1000);
+        };
     };
 
     $("#triviaDiv").on("click", "#startButton", function () {
