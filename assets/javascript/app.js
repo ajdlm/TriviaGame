@@ -12,7 +12,7 @@ $(document).ready(function () {
                 answer3: "East Anglia",
                 answer4: "Northumbria",
                 correctAnswer: "answer2",
-                image: "../images/flag-of-mercia.png"
+                image: "assets/images/flag-of-mercia.png"
             },
 
             {
@@ -22,7 +22,7 @@ $(document).ready(function () {
                 answer3: "Æthelstan",
                 answer4: "Edward the Elder",
                 correctAnswer: "answer3",
-                image: "../images/athelstan-portrait.jpg"
+                image: "assets/images/athelstan-portrait.jpg"
             },
 
             {
@@ -32,7 +32,7 @@ $(document).ready(function () {
                 answer3: "Ælfweard",
                 answer4: "Edward the Confessor",
                 correctAnswer: "answer4",
-                image: "../images/edward-the-confessor.jpg"
+                image: "assets/images/edward-the-confessor.jpg"
             },
 
             {
@@ -42,7 +42,7 @@ $(document).ready(function () {
                 answer3: "Wulfhild",
                 answer4: "Ælfflæd",
                 correctAnswer: "answer2",
-                image: "../images/emma-of-normandy.jpg"
+                image: "assets/images/emma-of-normandy.jpg"
             },
 
             {
@@ -52,7 +52,7 @@ $(document).ready(function () {
                 answer3: "hero or champion",
                 answer4: "holy man",
                 correctAnswer: "answer1",
-                image: "../images/harold-godwinson.jpg"
+                image: "assets/images/harold-godwinson.jpg"
             },
 
             {
@@ -62,7 +62,7 @@ $(document).ready(function () {
                 answer3: "The ransom paid for a captured aristocrat.",
                 answer4: "The amount of money paid in compensation for crippling or murdering someone.",
                 correctAnswer: "answer4",
-                image: "../images/weregild-payment.png"
+                image: "assets/images/weregild-payment.png"
             },
 
             {
@@ -72,7 +72,7 @@ $(document).ready(function () {
                 answer3: "a large, mallet-like hammer",
                 answer4: "a short spear",
                 correctAnswer: "answer1",
-                image: "../images/seax.jpg"
+                image: "assets/images/seax.jpg"
             },
 
             {
@@ -82,7 +82,7 @@ $(document).ready(function () {
                 answer3: "Rædwulf of Northumbria",
                 answer4: "Offa of Mercia",
                 correctAnswer: "answer4",
-                image: "../images/offa-coin.jpg"
+                image: "assets/images/offa-coin.jpg"
             },
 
             {
@@ -92,7 +92,7 @@ $(document).ready(function () {
                 answer3: "the Kentish coast",
                 answer4: "Monkwearmouth–Jarrow Abbey",
                 correctAnswer: "answer1",
-                image: "../images/lindisfarne.jpg"
+                image: "assets/images/lindisfarne.jpg"
             },
 
             {
@@ -102,18 +102,56 @@ $(document).ready(function () {
                 answer3: "Guthrum",
                 answer4: "Ivar the Boneless",
                 correctAnswer: "answer3",
-                image: "../images/guthrum-conversion.jpg"
+                image: "assets/images/guthrum-conversion.jpg"
             }
         ],
 
         correctAnswer: "",
 
-        currentImage: ""
+        correctAnswerNumber: "",
+
+        currentImage: "",
+
+        timerInterval: ""
+    };
+
+    function correctChoice() {
+        clearInterval(myGlobal.timerInterval);
+
+        $(".deleteThis").remove();
+
+        var sayCorrect = $("<h2>");
+
+        sayCorrect.text("Correct!");
+
+        var answerImage = $("<img>");
+
+        answerImage.attr("src", myGlobal.currentImage).css("max-width", "50vw").css("max-height", "30vw").css("border-width", "5px !important").addClass("border border-warning my-3");
+
+        $("#triviaDiv").append(answerImage, sayCorrect);
+    };
+
+    function incorrectChoice() {
+        clearInterval(myGlobal.timerInterval);
+
+        $(".deleteThis").remove();
+
+        var sayNope = $("<h2>");
+
+        sayNope.text("Nice try!")
+
+        var showCorrectAnswer = $("<h2>");
+
+        showCorrectAnswer.text("Correct Answer: " + myGlobal.correctAnswer);
+
+        var answerImage = $("<img>");
+
+        answerImage.attr("src", myGlobal.currentImage).css("max-width", "50vw").css("max-height", "30vw").css("border-width", "5px !important").addClass("border border-warning my-3");
+
+        $("#triviaDiv").append(answerImage, sayNope, showCorrectAnswer);
     };
 
     function tooLate() {
-        $("#triviaDiv").empty();
-
         var outOfTime = $("<h2>");
 
         outOfTime.text("Out of time!");
@@ -124,7 +162,9 @@ $(document).ready(function () {
 
         var answerImage = $("<img>");
 
-        answerImage.attr("src", myGlobal.currentImage);
+        answerImage.attr("src", myGlobal.currentImage).css("max-width", "50vw").css("max-height", "30vw").css("border-width", "5px !important").addClass("border border-warning my-3");
+
+        $("#triviaDiv").append(answerImage, outOfTime, showCorrectAnswer);
     };
 
     function newQuestion() {
@@ -134,7 +174,23 @@ $(document).ready(function () {
 
         var chosenQuestion = myGlobal.questionOptions[questionChoice];
 
-        myGlobal.correctAnswer = chosenQuestion.correctAnswer;
+        myGlobal.correctAnswerNumber = chosenQuestion.correctAnswer;
+
+        if (chosenQuestion.correctAnswer === "answer1") {
+            myGlobal.correctAnswer = chosenQuestion.answer1;
+        }
+
+        else if (chosenQuestion.correctAnswer === "answer2") {
+            myGlobal.correctAnswer = chosenQuestion.answer2;
+        }
+
+        else if (chosenQuestion.correctAnswer === "answer3") {
+            myGlobal.correctAnswer = chosenQuestion.answer3;
+        }
+
+        else {
+            myGlobal.correctAnswer = chosenQuestion.answer4;
+        };
 
         myGlobal.currentImage = chosenQuestion.image;
 
@@ -152,31 +208,32 @@ $(document).ready(function () {
 
         var answer1 = $("<h1>");
 
-        answer1.text(chosenQuestion.answer1);
+        answer1.text(chosenQuestion.answer1).attr("id", "answerOne");
 
         var answer2 = $("<h1>");
 
-        answer2.text(chosenQuestion.answer2);
+        answer2.text(chosenQuestion.answer2).attr("id", "answerTwo");
 
         var answer3 = $("<h1>");
 
-        answer3.text(chosenQuestion.answer3);
+        answer3.text(chosenQuestion.answer3).attr("id", "answerThree");
 
         var answer4 = $("<h1>");
 
-        answer4.text(chosenQuestion.answer4);
+        answer4.text(chosenQuestion.answer4).attr("id", "answerFour");
 
-        nextQuestion.append(timeRemaining, "<br />", question, "<br />", answer1, answer2, answer3, answer4).addClass("text-warning");
+        nextQuestion.append("<br />", question, "<br />", answer1, answer2, answer3, answer4).addClass("deleteThis");
 
-        $("#triviaDiv").append(nextQuestion);
+        $("#triviaDiv").append(timeRemaining, nextQuestion);
 
         if (!myGlobal.timesUp) {
-            var timerInterval = setInterval(function () {
+            myGlobal.timerInterval = setInterval(function () {
                 myGlobal.questionTimer--;
                 $(".keepACount").text("Time Remaining: " + myGlobal.questionTimer + " Seconds");
                 if (myGlobal.questionTimer === 0) {
                     myGlobal.timesUp = true;
-                    clearInterval(timerInterval);
+                    clearInterval(myGlobal.timerInterval);
+                    $(".deleteThis").remove();
                     tooLate();
                 };
             }, 1000);
@@ -185,5 +242,45 @@ $(document).ready(function () {
 
     $("#triviaDiv").on("click", "#startButton", function () {
         newQuestion();
+    });
+
+    $("#triviaDiv").on("click", "#answerOne", function () {
+        if (myGlobal.correctAnswerNumber === "answer1") {
+            correctChoice();
+        }
+
+        else {
+            incorrectChoice();
+        };
+    });
+
+    $("#triviaDiv").on("click", "#answerTwo", function () {
+        if (myGlobal.correctAnswerNumber === "answer2") {
+            correctChoice();
+        }
+
+        else {
+            incorrectChoice();
+        };
+    });
+
+    $("#triviaDiv").on("click", "#answerThree", function () {
+        if (myGlobal.correctAnswerNumber === "answer3") {
+            correctChoice();
+        }
+
+        else {
+            incorrectChoice();
+        };
+    });
+
+    $("#triviaDiv").on("click", "#answerFour", function () {
+        if (myGlobal.correctAnswerNumber === "answer4") {
+            correctChoice();
+        }
+
+        else {
+            incorrectChoice();
+        };
     });
 });
