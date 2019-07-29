@@ -56,11 +56,11 @@ $(document).ready(function () {
             },
 
             {
-                question: "What was the weregild?",
-                answer1: "The highest honor one could receive for valor in battle.",
-                answer2: "The quality of being a great king.",
-                answer3: "The ransom paid for a captured aristocrat.",
-                answer4: "The amount of money paid in compensation for crippling or murdering someone.",
+                question: "What was the Old English term for the amount of money paid in compensation for crippling or murdering someone?",
+                answer1: "danegeld",
+                answer2: "bretwalda",
+                answer3: "gaderung",
+                answer4: "weregild",
                 correctAnswer: "answer4",
                 image: "assets/images/weregild-payment.png"
             },
@@ -136,9 +136,9 @@ $(document).ready(function () {
 
         var answerImage = $("<img>");
 
-        answerImage.attr("src", myGlobal.currentImage).css("max-width", "50vw").css("max-height", "30vw").addClass("my-3").css("border-style", "solid").css("border-color", "#ffc107").css("border-width", "5px");
+        answerImage.attr("src", myGlobal.currentImage).css("max-width", "50vw").css("max-height", "20vw").addClass("my-3").css("border-style", "solid").css("border-color", "#ffc107").css("border-width", "5px");
 
-        $("#triviaDiv").append(answerImage, sayCorrect);
+        $("#triviaDiv").append("<br />", sayCorrect, "<br />", answerImage);
 
         queueQuestion();
     };
@@ -160,9 +160,9 @@ $(document).ready(function () {
 
         var answerImage = $("<img>");
 
-        answerImage.attr("src", myGlobal.currentImage).css("max-width", "50vw").css("max-height", "30vw").addClass("my-3").css("border-style", "solid").css("border-color", "#ffc107").css("border-width", "5px");
+        answerImage.attr("src", myGlobal.currentImage).css("max-width", "50vw").css("max-height", "20vw").addClass("my-3").css("border-style", "solid").css("border-color", "#ffc107").css("border-width", "5px");
 
-        $("#triviaDiv").append(answerImage, sayNope, showCorrectAnswer);
+        $("#triviaDiv").append("<br />", sayNope, "<br />", showCorrectAnswer, "<br />", answerImage);
 
         queueQuestion();
     };
@@ -180,9 +180,9 @@ $(document).ready(function () {
 
         var answerImage = $("<img>");
 
-        answerImage.attr("src", myGlobal.currentImage).css("max-width", "50vw").css("max-height", "30vw").addClass("my-3").css("border-style", "solid").css("border-color", "#ffc107").css("border-width", "5px");
+        answerImage.attr("src", myGlobal.currentImage).css("max-width", "50vw").css("max-height", "20vw").addClass("my-3").css("border-style", "solid").css("border-color", "#ffc107").css("border-width", "5px");
 
-        $("#triviaDiv").append(answerImage, outOfTime, showCorrectAnswer);
+        $("#triviaDiv").append("<br />", outOfTime, "<br />", showCorrectAnswer, "<br />", answerImage);
 
         queueQuestion();
     };
