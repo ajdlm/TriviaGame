@@ -38,3 +38,27 @@ button {
     width: 20vw;
     height: 10vw;
 }
+
+@media screen and (max-width: 980px) {
+    #gameTitle {
+        font-size: 5.75vw;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #gameTitle {
+        font-size: 5.5vw;
+    }
+}
+
+@media screen and (max-width: 680px) {
+    #gameTitle {
+        font-size: 5.75vw;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    #gameTitle {
+        font-size: 6vw;
+    }
+}
