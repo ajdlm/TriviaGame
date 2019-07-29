@@ -106,6 +106,8 @@ $(document).ready(function () {
             }
         ],
 
+        questionsFinished: [],
+
         correctAnswer: "",
 
         correctAnswerNumber: "",
@@ -216,6 +218,8 @@ $(document).ready(function () {
 
         var chosenQuestion = myGlobal.questionOptions[questionChoice];
 
+        myGlobal.questionsFinished.push(chosenQuestion);
+
         myGlobal.questionOptions.splice(questionChoice, 1);
 
         myGlobal.correctAnswerNumber = chosenQuestion.correctAnswer;
@@ -252,19 +256,19 @@ $(document).ready(function () {
 
         var answer1 = $("<h1>");
 
-        answer1.text(chosenQuestion.answer1).attr("id", "answerOne").css("cursor", "pointer");
-
+        answer1.text(chosenQuestion.answer1).attr("id", "answerOne").addClass("possibleAnswer").css("cursor", "pointer");
+        
         var answer2 = $("<h1>");
 
-        answer2.text(chosenQuestion.answer2).attr("id", "answerTwo").css("cursor", "pointer");
+        answer2.text(chosenQuestion.answer2).attr("id", "answerTwo").addClass("possibleAnswer").css("cursor", "pointer");
 
         var answer3 = $("<h1>");
 
-        answer3.text(chosenQuestion.answer3).attr("id", "answerThree").css("cursor", "pointer");
+        answer3.text(chosenQuestion.answer3).attr("id", "answerThree").addClass("possibleAnswer").css("cursor", "pointer");
 
         var answer4 = $("<h1>");
 
-        answer4.text(chosenQuestion.answer4).attr("id", "answerFour").css("cursor", "pointer");
+        answer4.text(chosenQuestion.answer4).attr("id", "answerFour").addClass("possibleAnswer").css("cursor", "pointer");
 
         nextQuestion.append("<br />", question, "<br />", answer1, answer2, answer3, answer4).addClass("deleteThis");
 
@@ -294,6 +298,15 @@ $(document).ready(function () {
         };
     };
 
+    $("#triviaDiv").on("mouseenter", ".possibleAnswer", function() {
+        $(this).addClass("bg-warning text-danger");
+    });
+
+    $("#triviaDiv").on("mouseleave", ".possibleAnswer", function() {
+        $(this).removeClass("bg-warning text-danger");
+    });
+
+    // function(){ $(this).removeClass("bg-warning") }
     $("#triviaDiv").on("click", "#startButton", function () {
         newQuestion();
     });
@@ -336,5 +349,19 @@ $(document).ready(function () {
         else {
             incorrectChoice();
         };
+    });
+
+    $("#triviaDiv").on("click", "#restartButton", function () {
+        myGlobal.questionOptions = myGlobal.questionsFinished;
+
+        myGlobal.questionsFinished = [];
+
+        myGlobal.correctAnswerCount = 0;
+
+        myGlobal.incorrectAnswerCount = 0;
+
+        myGlobal.unansweredCount = 0;
+
+        newQuestion();
     });
 });
