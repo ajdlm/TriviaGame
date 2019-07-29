@@ -112,11 +112,19 @@ $(document).ready(function () {
 
         currentImage: "",
 
-        timerInterval: ""
+        timerInterval: "",
+
+        correctAnswerCount: 0,
+
+        incorrectAnswerCount: 0,
+
+        outOfTimeCount: 0
     };
 
     function correctChoice() {
         clearInterval(myGlobal.timerInterval);
+
+        correctAnswerCount++;
 
         $(".deleteThis").remove();
 
@@ -129,10 +137,14 @@ $(document).ready(function () {
         answerImage.attr("src", myGlobal.currentImage).css("max-width", "50vw").css("max-height", "30vw").css("border-width", "5px !important").addClass("border border-warning my-3");
 
         $("#triviaDiv").append(answerImage, sayCorrect);
+
+        queueQuestion();
     };
 
     function incorrectChoice() {
         clearInterval(myGlobal.timerInterval);
+
+        incorrectAnswerCount++;
 
         $(".deleteThis").remove();
 
@@ -149,9 +161,13 @@ $(document).ready(function () {
         answerImage.attr("src", myGlobal.currentImage).css("max-width", "50vw").css("max-height", "30vw").css("border-width", "5px !important").addClass("border border-warning my-3");
 
         $("#triviaDiv").append(answerImage, sayNope, showCorrectAnswer);
+
+        queueQuestion();
     };
 
     function tooLate() {
+        outOfTimeCount++;
+
         var outOfTime = $("<h2>");
 
         outOfTime.text("Out of time!");
@@ -165,6 +181,8 @@ $(document).ready(function () {
         answerImage.attr("src", myGlobal.currentImage).css("max-width", "50vw").css("max-height", "30vw").css("border-width", "5px !important").addClass("border border-warning my-3");
 
         $("#triviaDiv").append(answerImage, outOfTime, showCorrectAnswer);
+
+        queueQuestion();
     };
 
     function newQuestion() {
@@ -173,6 +191,8 @@ $(document).ready(function () {
         var questionChoice = Math.floor(Math.random() * myGlobal.questionOptions.length);
 
         var chosenQuestion = myGlobal.questionOptions[questionChoice];
+
+        myGlobal.questionOptions.splice(questionChoice, 1);
 
         myGlobal.correctAnswerNumber = chosenQuestion.correctAnswer;
 
@@ -208,19 +228,19 @@ $(document).ready(function () {
 
         var answer1 = $("<h1>");
 
-        answer1.text(chosenQuestion.answer1).attr("id", "answerOne");
+        answer1.text(chosenQuestion.answer1).attr("id", "answerOne").css("cursor", "pointer");
 
         var answer2 = $("<h1>");
 
-        answer2.text(chosenQuestion.answer2).attr("id", "answerTwo");
+        answer2.text(chosenQuestion.answer2).attr("id", "answerTwo").css("cursor", "pointer");
 
         var answer3 = $("<h1>");
 
-        answer3.text(chosenQuestion.answer3).attr("id", "answerThree");
+        answer3.text(chosenQuestion.answer3).attr("id", "answerThree").css("cursor", "pointer");
 
         var answer4 = $("<h1>");
 
-        answer4.text(chosenQuestion.answer4).attr("id", "answerFour");
+        answer4.text(chosenQuestion.answer4).attr("id", "answerFour").css("cursor", "pointer");
 
         nextQuestion.append("<br />", question, "<br />", answer1, answer2, answer3, answer4).addClass("deleteThis");
 
@@ -237,6 +257,20 @@ $(document).ready(function () {
                     tooLate();
                 };
             }, 1000);
+        };
+    };
+
+    function gameFinished() {
+        alert("Oh wow! It over!")
+    };
+
+    function queueQuestion() {
+        if (myGlobal.questionOptions.length > 0) {
+            setTimeout(newQuestion, 3000);
+        }
+
+        else {
+            setTimeout(gameFinished, 3000);
         };
     };
 
