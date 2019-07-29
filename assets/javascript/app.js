@@ -118,13 +118,13 @@ $(document).ready(function () {
 
         incorrectAnswerCount: 0,
 
-        outOfTimeCount: 0
+        unansweredCount: 0
     };
 
     function correctChoice() {
         clearInterval(myGlobal.timerInterval);
 
-        correctAnswerCount++;
+        myGlobal.correctAnswerCount++;
 
         $(".deleteThis").remove();
 
@@ -144,7 +144,7 @@ $(document).ready(function () {
     function incorrectChoice() {
         clearInterval(myGlobal.timerInterval);
 
-        incorrectAnswerCount++;
+        myGlobal.incorrectAnswerCount++;
 
         $(".deleteThis").remove();
 
@@ -166,7 +166,7 @@ $(document).ready(function () {
     };
 
     function tooLate() {
-        outOfTimeCount++;
+        myGlobal.unansweredCount++;
 
         var outOfTime = $("<h2>");
 
@@ -183,6 +183,30 @@ $(document).ready(function () {
         $("#triviaDiv").append(answerImage, outOfTime, showCorrectAnswer);
 
         queueQuestion();
+    };
+
+    function gameFinished() {
+        var allDone = $("<h2>");
+
+        allDone.text("You finished! Here are your results:");
+
+        var correctAnswerResults = $("<h3>");
+
+        correctAnswerResults.text("Correct Answers: " + myGlobal.correctAnswerCount);
+
+        var incorrectAnswerResults = $("<h3>");
+
+        incorrectAnswerResults.text("Incorrect Answers: " + myGlobal.incorrectAnswerCount);
+
+        var unansweredResults = $("<h3>");
+        
+        unansweredResults.text("Unanswered: " + myGlobal.unansweredCount);
+
+        var restartButton = $("<button>");
+
+        restartButton.text("Try Again").addClass("btn btn-warning").attr("id", "restartButton");
+
+        $("#triviaDiv").empty().append(allDone, correctAnswerResults, incorrectAnswerResults, unansweredResults, restartButton);
     };
 
     function newQuestion() {
@@ -258,10 +282,6 @@ $(document).ready(function () {
                 };
             }, 1000);
         };
-    };
-
-    function gameFinished() {
-        alert("Oh wow! It over!")
     };
 
     function queueQuestion() {
