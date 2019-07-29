@@ -24,6 +24,11 @@ h3 {
     font-size: 1.9vw;
 }
 
+img {
+    max-width: 50vw;
+    max-height: 20vw;
+}
+
 button {
     font-size: 4vw !important;
 }
@@ -42,6 +47,22 @@ button {
 @media screen and (max-width: 980px) {
     #gameTitle {
         font-size: 5.75vw;
+    }
+
+    h1 {
+        font-size: 3.75vw;
+    }
+    
+    h2 {
+        font-size: 3vw;
+    }
+    
+    h3 {
+        font-size: 2.75vw;
+    }
+
+    img {
+        max-height: 35vw;
     }
 }
 
