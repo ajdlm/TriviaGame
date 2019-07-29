@@ -136,7 +136,7 @@ $(document).ready(function () {
 
         var answerImage = $("<img>");
 
-        answerImage.attr("src", myGlobal.currentImage).css("max-width", "50vw").css("max-height", "30vw").css("border-width", "5px !important").addClass("border border-warning my-3");
+        answerImage.attr("src", myGlobal.currentImage).css("max-width", "50vw").css("max-height", "30vw").addClass("my-3").css("border-style", "solid").css("border-color", "#ffc107").css("border-width", "5px");
 
         $("#triviaDiv").append(answerImage, sayCorrect);
 
@@ -160,7 +160,7 @@ $(document).ready(function () {
 
         var answerImage = $("<img>");
 
-        answerImage.attr("src", myGlobal.currentImage).css("max-width", "50vw").css("max-height", "30vw").css("border-width", "5px !important").addClass("border border-warning my-3");
+        answerImage.attr("src", myGlobal.currentImage).css("max-width", "50vw").css("max-height", "30vw").addClass("my-3").css("border-style", "solid").css("border-color", "#ffc107").css("border-width", "5px");
 
         $("#triviaDiv").append(answerImage, sayNope, showCorrectAnswer);
 
@@ -180,7 +180,7 @@ $(document).ready(function () {
 
         var answerImage = $("<img>");
 
-        answerImage.attr("src", myGlobal.currentImage).css("max-width", "50vw").css("max-height", "30vw").css("border-width", "5px !important").addClass("border border-warning my-3");
+        answerImage.attr("src", myGlobal.currentImage).css("max-width", "50vw").css("max-height", "30vw").addClass("my-3").css("border-style", "solid").css("border-color", "#ffc107").css("border-width", "5px");
 
         $("#triviaDiv").append(answerImage, outOfTime, showCorrectAnswer);
 

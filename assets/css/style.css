@@ -1,7 +1,31 @@
+body, html {
+    height: 100%;
+}
+
 body {
     background-image: url("../images/conquest-background.jpg");
     background-size: cover;
     font-family: 'MedievalSharp', cursive;
+}
+
+#gameTitle {
+    font-size: 5vw;
+}
+
+h1 {
+    font-size: 3vw;
+}
+
+h2 {
+    font-size: 2.2vw;
+}
+
+h3 {
+    font-size: 1.9vw;
+}
+
+button {
+    font-size: 4vw !important;
 }
 
 #gameContainer {
