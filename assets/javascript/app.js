@@ -208,7 +208,7 @@ $(document).ready(function () {
 
         restartButton.text("Try Again").addClass("btn btn-warning").attr("id", "restartButton");
 
-        $("#triviaDiv").empty().append(allDone, correctAnswerResults, incorrectAnswerResults, unansweredResults, restartButton);
+        $("#triviaDiv").empty().append(allDone, "<br />", correctAnswerResults, "<br />", incorrectAnswerResults, "<br />", unansweredResults, "<br />", restartButton);
     };
 
     function newQuestion() {
