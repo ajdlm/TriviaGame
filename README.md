@@ -16,6 +16,6 @@ A trivia quiz with questions about the medieval Anglo-Saxons.
 
 * Afterwards, if more questions remain, another will be displayed on the page.
 
-* If, instead, there are no more questions left to answer, the number of correct answers, incorrect answers, and unanswered questions will be displayed, along with a button reading TRY AGAIN.
+* If, instead, there are no more questions left to answer, the number of correct answers, incorrect answers, and unanswered questions will be displayed, along with a button reading "TRY AGAIN."
 
-* If the user clicks on the TRY AGAIN button, the quiz will restart
+* If the user clicks on the TRY AGAIN button, the quiz will restart.
