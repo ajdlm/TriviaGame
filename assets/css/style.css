@@ -70,6 +70,18 @@ button {
     #gameTitle {
         font-size: 5.5vw;
     }
+
+    h2 {
+        font-size: 3.25vw;
+    }
+    
+    h3 {
+        font-size: 3vw;
+    }
+
+    img {
+        max-width: 45vw;
+    }
 }
 
 @media screen and (max-width: 680px) {
