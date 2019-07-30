@@ -40,8 +40,8 @@ button {
 }
 
 #startButton {
-    width: 20vw;
-    height: 10vw;
+    min-width: 20vw;
+    min-height: 10vw;
 }
 
 @media screen and (max-width: 980px) {
