@@ -281,7 +281,7 @@ $(document).ready(function () {
                 myGlobal.questionTimer--;
                 $(".keepACount").text("Time Remaining: " + myGlobal.questionTimer + " Seconds");
                 if (myGlobal.questionTimer === 0) {
-                    myGlobal.timesUp = true; //THIS IS THE ISSUE
+                    myGlobal.timesUp = true;
                     clearInterval(myGlobal.timerInterval);
                     $(".deleteThis").remove();
                     tooLate();
