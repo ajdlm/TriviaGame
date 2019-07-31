@@ -246,6 +246,8 @@ $(document).ready(function () {
 
         myGlobal.questionTimer = 30;
 
+        myGlobal.timesUp = false;
+
         var timeRemaining = $("<h2>");
 
         timeRemaining.text("Time Remaining: 30 Seconds").addClass("keepACount");
@@ -279,7 +281,7 @@ $(document).ready(function () {
                 myGlobal.questionTimer--;
                 $(".keepACount").text("Time Remaining: " + myGlobal.questionTimer + " Seconds");
                 if (myGlobal.questionTimer === 0) {
-                    myGlobal.timesUp = true;
+                    myGlobal.timesUp = true; //THIS IS THE ISSUE
                     clearInterval(myGlobal.timerInterval);
                     $(".deleteThis").remove();
                     tooLate();
