@@ -308,7 +308,6 @@ $(document).ready(function () {
         $(this).removeClass("bg-warning text-danger");
     });
 
-    // function(){ $(this).removeClass("bg-warning") }
     $("#triviaDiv").on("click", "#startButton", function () {
         newQuestion();
     });
