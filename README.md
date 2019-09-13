@@ -2,6 +2,8 @@
 
 A trivia quiz with questions about the medieval Anglo-Saxons.
 
+Deployed application at https://ajdlm.github.io/anglo-saxon-trivia/.
+
 ## How to Play
 
 * Click on the START button to begin.
